@@ -104,7 +104,7 @@ static std::string encode_string(std::string input) {
     size_t encoded_output_length;
     if (mbedtls_base64_encode(encoded_output, MAX_ENCODING_LENGTH, &encoded_output_length, (const unsigned char*) input.c_str(), input.length()) != 0) {
         printf("Error: mbedtls_base64_encode!");
-        return false;
+        return NULL;
     }
 
     std::string encoded_output_string = std::string((const char*) encoded_output, encoded_output_length);
@@ -116,7 +116,7 @@ static std::string decode_string(std::string input) {
     size_t decoded_output_length;
     if (mbedtls_base64_decode(decoded_output, MAX_ENCODING_LENGTH, &decoded_output_length, (const unsigned char*) input.c_str(), input.length()) != 0) {
         printf("Error: mbedtls_base64_decode!");
-        return false;
+        return NULL;
     }
 
     std::string decoded_output_string = std::string((const char*) decoded_output, decoded_output_length);

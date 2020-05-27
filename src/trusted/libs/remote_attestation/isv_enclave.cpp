@@ -218,7 +218,7 @@ sgx_status_t ecall_enclave_init_ra(
 {
     // isv enclave call to trusted key exchange library.
     sgx_status_t ret;
-    if(b_pse)
+    /*if(b_pse)
     {
         int busy_retry_times = 2;
         do{
@@ -226,17 +226,17 @@ sgx_status_t ecall_enclave_init_ra(
         }while (ret == SGX_ERROR_BUSY && busy_retry_times--);
         if (ret != SGX_SUCCESS)
             return ret;
-    }
+    }*/
 #ifdef SUPPLIED_KEY_DERIVATION
     ret = sgx_ra_init_ex(&g_sp_pub_key, b_pse, key_derivation, p_context);
 #else
     ret = sgx_ra_init(&g_sp_pub_key, b_pse, p_context);
 #endif
-    if(b_pse)
+    /*if(b_pse)
     {
         sgx_close_pse_session();
         return ret;
-    }
+    }*/
     return ret;
 }
 

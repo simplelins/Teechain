@@ -1,5 +1,8 @@
-#include "sgx_uae_service.h"
+//#include "sgx_uae_service.h"
 #include "teechain_u.h"
+#include "sgx_uae_launch.h"
+#include "sgx_uae_epid.h"
+#include "sgx_uae_quote_ex.h"
 
 #include "channel.h"
 #include "network.h"

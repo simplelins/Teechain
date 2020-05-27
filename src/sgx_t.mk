@@ -46,7 +46,7 @@ Crypto_Library_Name := sgx_tcrypto
 
 teechain_Cpp_Files := $(shell find trusted/ -type f -name '*.cpp')
 teechain_C_Files := $(shell find trusted/ -type f -name '*.c')
-teechain_Include_Paths := -IInclude -Itrusted -I$(SGX_SDK)/include -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/stlport -I$(SGX_SDK)/include/stdc++ -Itrusted/ -Itrusted/libs/ -Itrusted/libs/bitcoin -Itrusted/libs/bitcoin/config -Itrusted/libs/bitcoin/univalue/include -Itrusted/libs/bitcoin/secp256k1/ -Itrusted/libs/bitcoin/secp256k1/include/ -Itrusted/libs/ -Itrusted/libs/remote_attestation
+teechain_Include_Paths := -IInclude -Itrusted -I$(SGX_SDK)/include -I$(SGX_SDK)/include/ipp -I$(SGX_SDK)/include/libcxx  -I$(SGX_SDK)/include/tlibc -I$(SGX_SDK)/include/stlport -I$(SGX_SDK)/include/stdc++ -Itrusted/ -Itrusted/libs/ -Itrusted/libs/bitcoin -Itrusted/libs/bitcoin/config -Itrusted/libs/bitcoin/univalue/include -Itrusted/libs/bitcoin/secp256k1/ -Itrusted/libs/bitcoin/secp256k1/include/ -Itrusted/libs/ -Itrusted/libs/remote_attestation
 
 Flags_Just_For_C := -Wno-implicit-function-declaration -std=c11
 Common_C_Cpp_Flags := $(SGX_COMMON_CFLAGS) -nostdinc -fvisibility=hidden -fpie -fstack-protector $(teechain_Include_Paths) -fno-builtin-printf -I. -DINTEL_SGX_ENV -DHAVE_CONFIG_H -Wreturn-type -Wextra 
@@ -55,7 +55,7 @@ teechain_Cpp_Flags :=  $(Common_C_Cpp_Flags) -std=c++11 -nostdinc++ -fno-builtin
 
 teechain_Link_Flags := $(SGX_COMMON_CFLAGS) -Wl,--no-undefined -nostdlib -nodefaultlibs -nostartfiles -L$(SGX_LIBRARY_PATH) \
     -Wl,--whole-archive -l$(Trts_Library_Name) -Wl,--no-whole-archive -Wl,--allow-multiple-definition \
-    -Wl,--start-group -Ltrusted/libs/mbedtls -lmbedtls_sgx_t -lsgx_tstdc -lsgx_tstdcxx -lsgx_tkey_exchange -l$(Crypto_Library_Name) -l$(Service_Library_Name) -Wl,--end-group \
+    -Wl,--start-group -Ltrusted/libs/mbedtls -lmbedtls_sgx_t -lsgx_tstdc -lsgx_tcxx -lsgx_tkey_exchange -l$(Crypto_Library_Name) -l$(Service_Library_Name)  -Wl,--end-group \
     -Wl,-Bstatic -Wl,-Bsymbolic -Wl,--no-undefined \
     -Wl,-pie,-eenclave_entry -Wl,--export-dynamic  \
     -Wl,--defsym,__ImageBase=0 \

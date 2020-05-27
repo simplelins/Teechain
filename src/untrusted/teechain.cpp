@@ -26,8 +26,10 @@
 
 #include <sgx_urts.h>
 #include "sgx_ukey_exchange.h"
-#include "sgx_uae_service.h"
-
+//#include "sgx_uae_service.h"
+#include "sgx_uae_launch.h"
+#include "sgx_uae_epid.h"
+#include "sgx_uae_quote_ex.h"
 #include "network.h"
 #include "service_provider.h"
 #include "sgx_utils.h"
